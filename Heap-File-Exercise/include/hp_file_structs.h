@@ -15,13 +15,25 @@
 /**
  * @brief Heap file header containing metadata about the file organization
  */
-typedef struct HeapFileHeader {
+typedef struct {
+  char magic[4];
+  int  version;
+  int  record_size;
+  int  total_blocks;
+  int  last_data_block;
 } HeapFileHeader;
 
 /**
  * @brief Iterator for scanning through records in a heap file
  */
-typedef struct HeapFileIterator{
+
+typedef struct {
+  int file_handle;
+  HeapFileHeader *header;
+  int target_id;
+  int current_block;
+  int current_index;
 } HeapFileIterator;
 
 #endif /* HP_FILE_STRUCTS_H */
+
